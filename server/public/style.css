@@ -1,0 +1,45 @@
+ body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+ }
+
+ header {
+    text-align: center;
+ }
+
+ .taskInput {
+    padding: 3em;
+    margin-left: 0em; 
+ }
+
+ .searchList {
+    text-align: center; 
+    margin-bottom: 2.5em;
+ }
+
+ table, tr {
+    border: 1px solid;
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+ th {
+    height: 70px;
+    border: 1px solid;
+ }
+
+ .taskInputSpacing {
+    margin-bottom: 1em;
+ }
+
+ #toDoText {
+    width: 300px;
+    padding: 9px 15px;
+ }
+
+ #dateText {
+    padding: 9px 15px;
+ }
+
