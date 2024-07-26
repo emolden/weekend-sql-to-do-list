@@ -12,11 +12,55 @@
   <header>
     <h1>Task Organizer</h1>
   </header>
-  <section>
+  <section class="taskInput">
     <h2>Enter New Task Below</h2>
-    <input type="text" id="toDoText" placeholder="Enter task here">
-    <input type="date" id="dateText" placeholder="Enter date in form of mm/dd/yyyy">
+    <label class="taskInputSpacing">Task:</label>
+    <br />
+    <input class="taskInputSpacing" type="text" id="toDoText" data-testid="toDoTextInput" placeholder="Enter task here">
+    <br />
+    <label class="taskInputSpacing">Deadline:</label>
+    <br />
+    <input class="taskInputSpacing" type="date" id="dateText" placeholder="Enter date in form of mm/dd/yyyy">
+    <br />
+    <button id="submitButton" class="taskInputSpacing" data-testid="submitButton" type="button">Submit</button>
   </section>
+
+  <section class="searchList">
+    <label class="searchListSpacing">Search your tasks below for key words:</label>
+    <br />
+    <input class="searchListSpacing" type="search" id="search" placeholder="Search">
+    <br />
+    <button class="searchListSpacing" type="button">Search</button>
+  </section>
+
+  <section class="taskList">
+    <table>
+      <thead>
+        <tr>
+          <th>Task Description</th>
+          <th>Due Date</th>
+          <th>Mark as complete</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="taskListLocation">
+        <tr>
+          <td class="completed" data-testid="toDoItem">Clean Room</td>
+          <td class="completed">08/01/2024</td>
+          <td class="completed">
+            <button data-testid="completeButton">Complete?</button>
+          </td>
+          <td class="completed">
+            <button data-testid="deleteButton">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </section>
+
+
 
 </body>
 </html>
