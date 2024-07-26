@@ -4,21 +4,21 @@ const pool = require('../modules/pool');
 
 // ------- GET route goes here --------
 
-    // router.get('/', (req, res) => {
-    //     let queryText = `
-    //     SELECT * FROM "books" 
-    //         ORDER BY "title";
-    //     `;
-    //     pool.query(queryText)
-    //     .then(result => {
-    //         // Sends back the results in an object
-    //         res.send(result.rows);
-    //     })
-    //     .catch(error => {
-    //         console.log('error getting books', error);
-    //         res.sendStatus(500);
-    //     });
-    // });
+router.get('/', (req, res) => {
+    let queryText = `
+    SELECT * FROM "todos"; 
+    `;
+    pool.query(queryText)
+    .then(result => {
+    // Sends back the results in an object
+    // console.log('in GET route. here are the tasks: ', result.rows)
+    res.send(result.rows);
+    })
+    .catch(error => {
+    console.log('error getting tasks', error);
+    res.sendStatus(500);
+    });
+});
 
 
 // ------- POST route goes here ---------

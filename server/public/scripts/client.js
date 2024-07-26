@@ -4,16 +4,25 @@ console.log('JS is sourced!');
 //create a function that initiates a GET route
 //and calls a render function when the data is sent back 
 // from the server and resets inputs
-//The GET will look something like this:
-    // axios({
-    //     method: 'GET',
-    //     url: '/books'
-    // }).then(function(response) {
-    //     console.log('refreshBooks() response', response.data);
-    //     renderBooks(response.data);
-    // }).catch(function(error){
-    //     console.log('error in GET', error);
-    // });
+
+
+//load existing tasks upon page load
+getTasks();
+//======STILL NEED TO CALL RENDER FUNCTION
+function getTasks() {
+    console.log('in getTasks function');
+    axios ({
+        method: 'GET',
+        url: '/todos'
+    })
+    .then(function(response) {
+        console.log('getTasks() response', response.data);
+        //renderBooks(response.data);
+    })
+    .catch(function(error){
+        console.log('error in GET', error);
+    });
+}
 
 
 //create a function that renders the data on the webpage
