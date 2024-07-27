@@ -17,7 +17,7 @@ function getTasks() {
     })
     .then(function(response) {
         console.log('getTasks() response', response.data);
-        //renderBooks(response.data);
+        renderTasks(response.data);
     })
     .catch(function(error){
         console.log('error in GET', error);
@@ -27,16 +27,31 @@ function getTasks() {
 
 //create a function that renders the data on the webpage
 // //This will have something like this in it:
-//        <tr>
-//           <td class="completed" data-testid="toDoItem">Clean Room</td>
-//           <td class="completed">08/01/2024</td>
-//           <td class="completed">
-//             <button data-testid="completeButton">Complete?</button>
-//           </td>
-//           <td class="completed">
-//             <button data-testid="deleteButton">Delete</button>
-//           </td>
-//         </tr>
+
+function renderTasks (array) {
+    //create variables: task location
+    //LOOP through array, adding a new table row each time
+    //IF object.isComplete is false, create a complete button
+    //IF object.isComplete is true, put a checkmark
+    let toDoLocation = document.getElementById('taskListLocation');
+    toDoLocation.innerHTML = '';
+
+    for(let object of array) {
+    toDoLocation.innerHTML += `
+    <tr>
+        <td class="completed" data-testid="toDoItem">${object.text}</td>
+        <td class="completed">date</td>
+        <td class="completed">
+            <button data-testid="completeButton">${object.isComplete}</button>
+        </td>
+        <td class="completed">
+            <button data-testid="deleteButton">Delete</button>
+        </td>
+    </tr>
+    `;
+    }
+}
+
 
 
 
