@@ -46,29 +46,29 @@ router.post('/',  (req, res) => {
 
 
 // ------- DELETE route goes here ----------
-    // router.delete('/:book_id', (req, res) => {
-    //     // console.log('DELETE /books received a request!');
-    //     // console.log('req.params is:', req.params);
+    router.delete('/:taskId', (req, res) => {
+        // console.log('DELETE /books received a request!');
+        // console.log('req.params is:', req.params);
     
-    //     const bookIdToDelete = req.params.book_id;
-    //     // console.log('bookIdToDelete: ', bookIdToDelete);
+        const taskIdToDelete = req.params.taskId;
+        // console.log('taskIdToDelete: ', taskIdToDelete);
     
-    //     const sqlText = `
-    //     DELETE FROM "books"
-    //         WHERE "id" = $1;
-    //     `;
-    //     const sqlValues = [bookIdToDelete];
+        const sqlText = `
+         DELETE FROM "todos"
+            WHERE "id" = $1;
+        `;
+        const sqlValues = [taskIdToDelete];
     
-    //     pool.query(sqlText, sqlValues)
+        pool.query(sqlText, sqlValues)
     
-    //     .then((dbResult) => {
-    //     res.sendStatus(200);
-    //     })
-    //     .catch((dbError) => {
-    //     console.log('SQL query in DELETE /books/:book_id error: ', dbError);
-    //     res.sendStatus(500);
-    //     })
-    // })
+        .then((dbResult) => {
+        res.sendStatus(200);
+        })
+        .catch((dbError) => {
+        console.log('SQL query in DELETE /todos/:taskId error: ', dbError);
+        res.sendStatus(500);
+        })
+    })
 
 
 

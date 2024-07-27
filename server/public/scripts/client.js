@@ -37,14 +37,14 @@ function renderTasks (array) {
 
     for(let object of array) {
     toDoLocation.innerHTML += `
-    <tr>
-        <td class="completed" data-testid="toDoItem">${object.text}</td>
-        <td class="completed">date</td>
+    <tr data-testid="toDoItem">
+        <td>${object.text}</td>
+        <td>date</td>
         <td class="completed">
             <button data-testid="completeButton">${object.isComplete}</button>
         </td>
-        <td class="completed">
-            <button data-testid="deleteButton">Delete</button>
+        <td data-testid="deleteButton">
+            <button onclick="deleteButton(${object.id})" >Delete</button>
         </td>
     </tr>
     `;
@@ -94,18 +94,25 @@ function postTask (taskObject) {
 // ------- DELETE route goes here ----------
 //create a function that is called when the delete button is pushed
 //function initiates a delete request to the server.
+//function needs the task id as an argument
 //It will look something like this
-    // axios({
-    //     method: 'DELETE',
-    //     url: `/books/${bookId}`
-    // })
-    // .then(function(response) {
-    //     console.log('deleteBooks() response', response.data);
-    //     refreshBooks(response.data);
-    // })
-    // .catch(function(error){
-    //     console.log('error in GET', error);
-    // });
+
+function deleteButton(taskId) {
+    // console.log('in delte button function');
+    axios({
+        method: 'DELETE',
+        url: `/todos/${taskId}`
+    })
+    .then(function(response) {
+        // console.log('deleteBooks() response', response.data);
+        getTasks(response.data);
+    })
+    .catch(function(error){
+        console.log('error in DELETE', error);
+    });
+
+}
+    
 
 
 
