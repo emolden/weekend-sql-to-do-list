@@ -5,6 +5,7 @@ const pool = require('../modules/pool');
 // ------- GET route goes here --------
 
 router.get('/', (req, res) => {
+    //could request todos by date order
     let queryText = `
     SELECT * FROM "todos"; 
     `;
@@ -22,21 +23,25 @@ router.get('/', (req, res) => {
 
 
 // ------- POST route goes here ---------
-    // router.post('/',  (req, res) => {
-    //     let newBook = req.body;
-    //     console.log(`Adding book`, newBook);
+router.post('/',  (req, res) => {
+    let newTask = req.body;
+    console.log(`Adding task`, newTask);
     
-    //     let queryText = `INSERT INTO "books" ("author", "title")
-    //                     VALUES ($1, $2);`;
-    //     pool.query(queryText, [newBook.author, newBook.title])
-    //     .then(result => {
-    //         res.sendStatus(201);
-    //     })
-    //     .catch(error => {
-    //         console.log(`Error adding new book`, error);
-    //         res.sendStatus(500);
-    //     });
-    // });
+    let queryText = `
+        INSERT INTO "todos"
+ 	        ("text")
+ 	        VALUES
+ 	        ($1);
+    `;
+    pool.query(queryText, [newTask.text])
+        .then(result => {
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log(`Error adding new book`, error);
+            res.sendStatus(500);
+        });
+    });
 
 
 

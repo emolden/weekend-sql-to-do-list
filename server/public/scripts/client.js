@@ -8,7 +8,6 @@ console.log('JS is sourced!');
 
 //load existing tasks upon page load
 getTasks();
-//======STILL NEED TO CALL RENDER FUNCTION
 function getTasks() {
     console.log('in getTasks function');
     axios ({
@@ -31,8 +30,8 @@ function getTasks() {
 function renderTasks (array) {
     //create variables: task location
     //LOOP through array, adding a new table row each time
-    //IF object.isComplete is false, create a complete button
-    //IF object.isComplete is true, put a checkmark
+    //=====IF object.isComplete is false, create a complete button
+    //=====IF object.isComplete is true, put a checkmark
     let toDoLocation = document.getElementById('taskListLocation');
     toDoLocation.innerHTML = '';
 
@@ -60,22 +59,35 @@ function renderTasks (array) {
 //This function creates an object with the inputs and calls a function
 //that sends the data
 
-
+function submitButton (event) {
+    //create variables: input, isComplete = false, object
+    let inputText = document.getElementById('toDoText').value;
+    // console.log ('in submitButton function. input is: ', inputText);
+    let newTask = {
+        text: inputText,
+    }
+    // console.log('object to send is: ', newTask);
+    postTask(newTask)
+}
 
 //Create a function that initiates a POST route and sends the object that was created
 // to the server that will look something like this:
+function postTask (taskObject) {
 
-    // axios({
-    //     method: 'POST',
-    //     url: '/books',
-    //     data: bookToAdd,
-    //     }).then(function(response) {
-    //     console.log('addBook()', response.data);
-    //     refreshBooks();
-    //     }).catch(function(error) {
-    //     console.log('Error in POST', error)
-    //     alert('Unable to add book at this time. Please try again later.');
-    //     });
+    axios({
+        method: 'POST',
+        url: '/todos',
+        data: taskObject,
+    })
+    .then(function(response) {
+        console.log('postTask()', response.data);
+        getTasks();
+    })
+    .catch(function(error) {
+        console.log('Error in POST', error)
+        alert('Unable to add task at this time. Please try again later.');
+    });
+}
 
 
 
