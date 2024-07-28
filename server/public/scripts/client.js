@@ -36,20 +36,37 @@ function renderTasks (array) {
     toDoLocation.innerHTML = '';
 
     for(let object of array) {
-    toDoLocation.innerHTML += `
-    <tr data-testid="toDoItem">
-        <td>${object.text}</td>
-        <td>date</td>
-        <td class="completed">
-            <button data-testid="completeButton">${object.isComplete}</button>
-        </td>
-        <td data-testid="deleteButton">
-            <button onclick="deleteButton(${object.id})" >Delete</button>
-        </td>
-    </tr>
-    `;
+        if(object.isComplete === true) {
+            toDoLocation.innerHTML += `
+                <tr data-testid="toDoItem">
+                    <td>${object.text}</td>
+                    <td>date</td>
+                    <td class="completed">
+                        <button data-testid="completeButton" onclick="completeButton(${object.id}, ${object.isComplete})">${object.isComplete}</button>
+                    </td>
+                    <td data-testid="deleteButton">
+                        <button onclick="deleteButton(${object.id})" >Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+        if(object.isComplete === false) {
+            toDoLocation.innerHTML += `
+                <tr data-testid="toDoItem">
+                    <td>${object.text}</td>
+                    <td>date</td>
+                    <td class="notCompleted">
+                        <button data-testid="completeButton" onclick="completeButton(${object.id}, ${object.isComplete})">${object.isComplete}</button>
+                    </td>
+                    <td data-testid="deleteButton">
+                        <button onclick="deleteButton(${object.id})" >Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
     }
 }
+
 
 
 
@@ -119,15 +136,23 @@ function deleteButton(taskId) {
 // -------- PUT route goes here ----------
 //create a function that is called when the complete button is pushed
 // that changes that changes the isComplete to true;
-    // axiaxios({
-    //     method: 'PUT',
-    //     url: `/books/${bookId}`,
-    //     data: {isRead: 'TRUE'}
-    //   })
-    //     .then((response) => {
-    //       refreshBooks();
-    //     })
-    //     .catch((error) => {
-    //       console.log('downvoteSong() error:', error);
-    //     })
+
+function completeButton (taskId, boolean) {
+    // console.log('in completeButton function. id and boolean are: ', taskId, boolean);
+
+    axios({
+        method: 'PUT',
+        url: `/todos/${taskId}`,
+        data: {isComplete: boolean}
+      })
+    .then((response) => {
+        getTasks();
+    })
+    .catch((error) => {
+        console.log('completeButton() error:', error);
+    })
+
+}
+    
+  
     

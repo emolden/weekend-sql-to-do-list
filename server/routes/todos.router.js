@@ -46,61 +46,61 @@ router.post('/',  (req, res) => {
 
 
 // ------- DELETE route goes here ----------
-    router.delete('/:taskId', (req, res) => {
-        // console.log('DELETE /books received a request!');
-        // console.log('req.params is:', req.params);
+router.delete('/:taskId', (req, res) => {
+    // console.log('DELETE /books received a request!');
+    // console.log('req.params is:', req.params);
     
-        const taskIdToDelete = req.params.taskId;
-        // console.log('taskIdToDelete: ', taskIdToDelete);
+    const taskIdToDelete = req.params.taskId;
+    // console.log('taskIdToDelete: ', taskIdToDelete);
     
-        const sqlText = `
-         DELETE FROM "todos"
+    const sqlText = `
+        DELETE FROM "todos"
             WHERE "id" = $1;
-        `;
-        const sqlValues = [taskIdToDelete];
+    `;
+    const sqlValues = [taskIdToDelete];
     
-        pool.query(sqlText, sqlValues)
+    pool.query(sqlText, sqlValues)
     
-        .then((dbResult) => {
+    .then((dbResult) => {
         res.sendStatus(200);
-        })
-        .catch((dbError) => {
+    })
+    .catch((dbError) => {
         console.log('SQL query in DELETE /todos/:taskId error: ', dbError);
         res.sendStatus(500);
-        })
     })
+})
 
 
 
 // -------- PUT route goes here ----------
-    // router.put('/:book_id', (req, res) => {
-    //     console.log('PUT /songs/:book_id received a request!');
+router.put('/:taskId', (req, res) => {
+    console.log('PUT /todos/:taskId received a request!');
         
-    //     const bookIdToUpdate = req.params.book_id;
-    //     const isRead = req.body.isRead;
+    const taskIdToUpdate = req.params.taskId;
+    const isComplete = req.body.isComplete;
     
-    //     console.log('bookIdToUpdate is:', bookIdToUpdate);
-    //     console.log('isREad is:', isRead);
+    console.log('taskIdToUpdate is:', taskIdToUpdate);
+    console.log('isComplete is:', isComplete);
     
     // Conditionally assign a SQL query based on what
     // direction we want the song's rank to go:
-    // let sqlText;
-    //     sqlText = `
-    //         UPDATE "books"
-    //         SET "isRead" = $1
-    //         WHERE "id" = $2;
-    //     `
-    //     const sqlValues = [isRead, bookIdToUpdate];
+    let sqlText;
+        sqlText = `
+            UPDATE "todos"
+                SET "isComplete" = NOT $1
+                WHERE "id" = $2;
+        `;
+        const sqlValues = [isComplete, taskIdToUpdate];
     
-    //     pool.query(sqlText, sqlValues)
-    //     .then((dbResult) => {
-    //         res.sendStatus(200);
-    //     })
-    //     .catch((dbError) => {
-    //         console.log('SQL query error in PUT /books/:book_id', dbError);
-    //         res.sendStatus(500);
-    //     })
-    // })
+        pool.query(sqlText, sqlValues)
+        .then((dbResult) => {
+            res.sendStatus(200);
+        })
+        .catch((dbError) => {
+            console.log('SQL query error in PUT /todos/:taskId', dbError);
+            res.sendStatus(500);
+        })
+    })
 
 
 module.exports = router;
