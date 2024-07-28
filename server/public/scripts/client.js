@@ -38,11 +38,11 @@ function renderTasks (array) {
     for(let object of array) {
         if(object.isComplete === true) {
             toDoLocation.innerHTML += `
-                <tr data-testid="toDoItem">
+                <tr data-testid="toDoItem" class="completed">
                     <td>${object.text}</td>
                     <td>date</td>
-                    <td class="completed">
-                        <button data-testid="completeButton" onclick="completeButton(${object.id}, ${object.isComplete})">${object.isComplete}</button>
+                    <td>
+                        <button onclick="completeButton(${object.id}, ${object.isComplete})">not complete</button>
                     </td>
                     <td data-testid="deleteButton">
                         <button onclick="deleteButton(${object.id})" >Delete</button>
@@ -52,11 +52,11 @@ function renderTasks (array) {
         }
         if(object.isComplete === false) {
             toDoLocation.innerHTML += `
-                <tr data-testid="toDoItem">
+                <tr data-testid="toDoItem" class="notCompleted">
                     <td>${object.text}</td>
                     <td>date</td>
-                    <td class="notCompleted">
-                        <button data-testid="completeButton" onclick="completeButton(${object.id}, ${object.isComplete})">${object.isComplete}</button>
+                    <td>
+                        <button data-testid="completeButton" onclick="completeButton(${object.id}, ${object.isComplete})">comlete</button>
                     </td>
                     <td data-testid="deleteButton">
                         <button onclick="deleteButton(${object.id})" >Delete</button>
